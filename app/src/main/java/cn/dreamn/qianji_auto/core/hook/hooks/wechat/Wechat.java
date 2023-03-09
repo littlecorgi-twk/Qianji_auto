@@ -26,14 +26,11 @@ import cn.dreamn.qianji_auto.core.hook.hooks.wechat.hooks.RedPackage;
 import cn.dreamn.qianji_auto.core.hook.hooks.wechat.hooks.Setting;
 
 public class Wechat extends hookBase {
-
-    static hookBase self = null;
-
+    static final hookBase self = new Wechat();
     public static hookBase getInstance() {
-        if (self == null)
-            self = new Wechat();
         return self;
     }
+
 
     @Override
     public void hookLoadPackage() {
@@ -45,13 +42,13 @@ public class Wechat extends hookBase {
                 utils.log("微信 Log HookError " + e.toString());
             }
         }*/
-        try {
+       /** try {
             LoginInfo.init(utils);
         } catch (Throwable e) {
             utils.log("微信 LoginInfo HookError " + e.toString());
-        }
+        }**/
         try {
-            Setting.init(utils);
+           Setting.init(utils);
         } catch (Throwable e) {
             utils.log("微信 Settings HookError " + e.toString());
         }
@@ -90,12 +87,13 @@ public class Wechat extends hookBase {
         return "微信";
     }
 
-
-
     @Override
     public boolean needHelpFindApplication() {
         return true;
     }
-
+    @Override
+    public int hookIndex() {
+        return 1;
+    }
 
 }
